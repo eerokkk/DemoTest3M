@@ -8,7 +8,6 @@ using DG.Tweening;
 public class GameTile : MonoBehaviour
 {
     private Mark mark;
-
     public Mark Mark
     {
         get => mark;
@@ -40,10 +39,28 @@ public class GameTile : MonoBehaviour
     }
     
     
-    private List<GameObject> FindMatch(Vector2Int castDir)
+    public List<GameObject> FindMatch(Vector2 castDir)
     {
         List<GameObject> matchingTiles = new List<GameObject>();
         RaycastHit2D hit = Physics2D.Raycast(transform.position, castDir);
+        while (hit.collider != null && mark == hit.collider.GetComponent<GameTile>().mark)
+        {
+            matchingTiles.Add(hit.collider.gameObject);
+            hit = Physics2D.Raycast(hit.collider.transform.position, castDir);
+        }
         return matchingTiles;
     }
+    
+    /*private void ClearMatch(Vector2[] paths)
+    {
+        List<GameObject> matchingTiles = new List<GameObject>();
+        for (int i = 0; i < paths.Length; i++)
+        {
+            matchingTiles.AddRange(FindMatch(paths[i]));
+        }
+        if (matchingTiles.Count >= 2) 
+        {
+            matchFound = true; 
+        }
+    }*/
 }
