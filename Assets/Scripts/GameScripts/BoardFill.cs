@@ -51,9 +51,9 @@ public class BoardFill : MonoBehaviour
                 spriteRight[y] = sprite;
                 spriteUp = sprite;
                 GameTiles[x, y].Mark = (Mark)sprite;
-                GameTiles[x, y].BornAnimation();
                 GameTiles[x, y].Row = x - 3;
                 GameTiles[x, y].Column = y - 4;
+                GameTiles[x, y].BornAnimation();
                 GameTiles[x, y].UpdatePosition();
             }
         }
